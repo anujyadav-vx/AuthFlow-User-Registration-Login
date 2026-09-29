@@ -1,2 +1,12 @@
 node_modules
 .env
+
+//What to do
+//Just wait. Check back in 24–48 hours. Your test commit and all your other commits should appear then.
+
+//If it's been more than 48 hours and still nothing, contact GitHub Support:
+
+//support.github.com/contact
+//Mention: "History rewritten with git filter-repo, force-pushed, contribution graph still empty after 48+ hours"
+//Include your username and repo URL
+//They can manually trigger a rebuild on their end
