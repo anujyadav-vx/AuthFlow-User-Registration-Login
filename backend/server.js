@@ -8,9 +8,12 @@ const authRoutes = require("./routes/authRoutes");
 const app = express();
 
 connectDB();
+
 app.use("/api/auth", authRoutes);
+
 app.use(cors());
 app.use(express.json());
+
 app.get("/", (req, res) => {
   res.json({
     message: "Auth API is running",
