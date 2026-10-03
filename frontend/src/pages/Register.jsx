@@ -1,13 +1,34 @@
 import { useState } from "react";
+import { registerUser } from "../services/authService";
 
 export default function Register() {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+
+  const handleRegister = async (e) => {
+    e.preventDefault();
+    try {
+      const data = await registerUser({
+        name,
+        email,
+        password,
+      });
+      localStorage.setItem("token", data.token);
+      alert("Registration Successful");
+      console.log(data.message);
+      setName("");
+      setEmail("");
+      setPassword("");
+    } catch (error) {
+      alert(error.response?.data?.message || "Registration failed");
+    }
+  };
+
   return (
     <div>
       <h2>Register</h2>
-      <form>
+      <form onSubmit={handleRegister}>
         <input
           type="name"
           placeholder="Enter your name"
@@ -32,7 +53,7 @@ export default function Register() {
         />
         <br />
         <br />
-        <button>Register</button>
+        <button type="submit">Register</button>
       </form>
     </div>
   );
