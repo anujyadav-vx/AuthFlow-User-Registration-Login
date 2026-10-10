@@ -5,19 +5,26 @@ import { loginUser } from "../services/authService";
 export default function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const navigate = useNavigate;
+  const navigate = useNavigate();
   const handleLogin = async (e) => {
     e.preventDefault();
+
     try {
       const data = await loginUser({
-        email,
+        email: email.trim().toLowerCase(),
         password,
       });
+
+      console.log("LOGIN RESPONSE:", data);
+
       localStorage.setItem("token", data.token);
 
-      navigate("/Profile");
+      navigate("/profile");
     } catch (error) {
-      alert(error.response?.data?.message || "Login failed");
+      console.error("Login error:", error);
+      console.error("Backend response:", error.response?.data);
+
+      alert(error.response?.data?.message || error.message || "Login failed");
     }
   };
 
