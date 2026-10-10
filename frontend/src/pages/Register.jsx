@@ -8,10 +8,11 @@ export default function Register() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
+  const navigate = useNavigate();
+
   const handleRegister = async (e) => {
     e.preventDefault();
     try {
-      const navigate = useNavigate();
       const data = await registerUser({
         name,
         email,

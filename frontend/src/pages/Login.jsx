@@ -5,18 +5,17 @@ import { loginUser } from "../services/authService";
 export default function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-
+  const navigate = useNavigate;
   const handleLogin = async (e) => {
     e.preventDefault();
     try {
-      const navigate = useNavigate;
       const data = await loginUser({
         email,
         password,
       });
       localStorage.setItem("token", data.token);
+
       navigate("/Profile");
-      console.log(data);
     } catch (error) {
       alert(error.response?.data?.message || "Login failed");
     }
