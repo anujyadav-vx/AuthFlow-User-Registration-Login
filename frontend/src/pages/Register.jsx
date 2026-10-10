@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { registerUser } from "../services/authService";
 
@@ -9,14 +11,15 @@ export default function Register() {
   const handleRegister = async (e) => {
     e.preventDefault();
     try {
+      const navigate = useNavigate();
       const data = await registerUser({
         name,
         email,
         password,
       });
       localStorage.setItem("token", data.token);
-      alert("Registration Successful");
       console.log(data.message);
+      navigate("/Login");
       setName("");
       setEmail("");
       setPassword("");
@@ -55,6 +58,10 @@ export default function Register() {
         <br />
         <button type="submit">Register</button>
       </form>
+      <p>
+        Already have account?
+        <Link to="/Login">Login</Link>
+      </p>
     </div>
   );
 }
