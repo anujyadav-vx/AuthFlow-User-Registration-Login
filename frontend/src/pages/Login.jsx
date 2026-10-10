@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { loginUser } from "../services/authService";
 export default function Login() {
@@ -7,12 +9,13 @@ export default function Login() {
   const handleLogin = async (e) => {
     e.preventDefault();
     try {
+      const navigate = useNavigate;
       const data = await loginUser({
         email,
         password,
       });
       localStorage.setItem("token", data.token);
-      alert("Login Successful");
+      navigate("/Profile");
       console.log(data);
     } catch (error) {
       alert(error.response?.data?.message || "Login failed");
@@ -41,6 +44,10 @@ export default function Login() {
         <br />
         <button type="submit">Login</button>
       </form>
+      <p>
+        Don't have account?
+        <Link to="/register">Register</Link>
+      </p>
     </div>
   );
 }
